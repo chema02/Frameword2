@@ -20,7 +20,7 @@ namespace WebApplication1.Models
             Fecha = fecha;
         }
     }
-   /* public class EventoDTO
+    public class EventoDTO
     {
         public string Equipolocal { get; set; }
         public string Equipovisitante { get; set; }
@@ -33,5 +33,5 @@ namespace WebApplication1.Models
             Fecha = fecha;
         }
 
-    }*/
+    }
 }

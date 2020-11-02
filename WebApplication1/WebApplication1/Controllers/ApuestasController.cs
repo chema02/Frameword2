@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
         public IEnumerable<Apuesta> Get()
         {
             var repo = new ApuestasRepository();
-            List<Apuesta> apuestas = repo.Retrieve();
+              List<Apuesta> apuestas = repo.Retrieve();
             //List<ApuestaDTO> apuestas = repo.RetrieveDTO();
 
             return apuestas;
@@ -47,12 +47,12 @@ namespace WebApplication1.Controllers
 
         // POST: api/Apuestas
        // [Authorize]
-       /* public void Post([FromBody]Apuesta apuesta)
+        public void Post([FromBody]Apuesta apuesta)
         {
             var repo = new ApuestasRepository();
             repo.Save(apuesta);
 
-        }*/
+        }
 
         // PUT: api/Apuestas/5
         public void Put(int id, [FromBody]string value)

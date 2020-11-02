@@ -30,7 +30,7 @@ namespace WebApplication1.Models
         }
 
     }
-   /* public class MercadoDTO
+    public class MercadoDTO
     {
         public float Over_Under { get; set; }
         public float Cuota_Over { get; set; }
@@ -43,6 +43,6 @@ namespace WebApplication1.Models
             Cuota_Under = cuota_Under;
         }
 
-    }*/
+    }
 
 }

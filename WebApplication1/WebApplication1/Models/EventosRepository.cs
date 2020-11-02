@@ -45,7 +45,7 @@ namespace WebApplication1.Models
 
             }
         }
-        /*internal List<EventoDTO> RetrieveDTO()
+        internal List<EventoDTO> RetrieveDTO()
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
@@ -72,7 +72,7 @@ namespace WebApplication1.Models
 
 
             }
-        }*/
+        }
     }
 
 }

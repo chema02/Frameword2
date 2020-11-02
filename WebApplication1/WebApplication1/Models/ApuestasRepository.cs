@@ -125,7 +125,7 @@ namespace WebApplication1.Models
 
             }
 
-        }
+        }*/
 
         internal List<ApuestaDTO> RetrieveDTO()
         {
@@ -143,7 +143,7 @@ namespace WebApplication1.Models
                     Debug.WriteLine("recuperamosdto: " + res.GetInt32(0) + " " + res.GetString(1)
                                     + " " + res.GetInt32(2) + " " + res.GetString(3) + " " +
                                     res.GetFloat(4) + " " + res.GetInt32(5) + " " + res.GetDateTime(6));
-                    a = new ApuestaDTO(res.GetString(1), res.GetInt32(2), res.GetString(3), res.GetFloat(4), res.GetInt32(5), res.GetDateTime(6));
+                    a = new ApuestaDTO(res.GetString(1), res.GetInt32(2), res.GetString(3), res.GetFloat(4), res.GetInt32(5));
                     apuestas.Add(a);
                 }
                 con.Close();
@@ -170,7 +170,7 @@ namespace WebApplication1.Models
                 con.Open();
                 command.ExecuteNonQuery();
                 MySqlCommand command1 = con.CreateCommand();
-                // command1.CommandText = "Selec * from Mercados WHERE ID = " + a.ID_Mercado + "";
+                // command1.CommandText = "Select * from Mercados WHERE ID = " + a.ID_Mercado + "";
                 int id = a.ID_Mercado;
                 command1.CommandText = "Select * from mercados WHERE ID =@id";
                 command1.Parameters.AddWithValue("@id", id);
@@ -254,7 +254,7 @@ namespace WebApplication1.Models
 
             }
 
-        }*/
+        }
 
     }
 

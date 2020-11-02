@@ -48,7 +48,7 @@ namespace WebApplication1.Models
             }
 
         }
-       /* internal List<MercadoDTO> RetrieveDTO()
+        internal List<MercadoDTO> RetrieveDTO()
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
@@ -75,7 +75,7 @@ namespace WebApplication1.Models
 
 
             }
-        }*/
+        }
 
         /*internal List<Mercado> RetrieveByTipoandId(int id, float tipo)
         {
