@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
             public Evento Get(int id)
             {
                 // var repo = new EventosRepository();
-                // Evento e = repo.Retrieve();
+                 //Evento e = repo.Retrieve();
                 return null;
 
             }

@@ -48,7 +48,7 @@ namespace WebApplication1.Models
             }
 
         }
-        /*internal List<Apuesta> RetrieveByUsuarioandId_mercado(string usuario, int id)
+        internal List<ApuestaEmailDTO> RetrieveByUsuarioandId_mercado(string usuario, int id)//
         {
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -65,14 +65,14 @@ namespace WebApplication1.Models
             {
                 con.Open();
                 MySqlDataReader res = command.ExecuteReader();
-                Apuesta a = null;
-                List<Apuesta> apuestas = new List<Apuesta>();
+                ApuestaEmailDTO a = null;
+                List<ApuestaEmailDTO> apuestas = new List<ApuestaEmailDTO>();
                 while (res.Read())
                 {
                     Debug.WriteLine("recuperamos2: " + res.GetInt32(0) + " " + res.GetString(1)
                                     + " " + res.GetInt32(2) + " " + res.GetString(3) + " " +
                                     res.GetFloat(4) + " " + res.GetInt32(5) + " " + res.GetDateTime(6));
-                    a = new Apuesta(res.GetInt32(0), res.GetString(1), res.GetInt32(2), res.GetString(3), res.GetFloat(4), res.GetInt32(5), res.GetDateTime(6));
+                    a = new ApuestaEmailDTO(res.GetString(1), res.GetInt32(2), res.GetString(3), res.GetFloat(4), res.GetInt32(5));
                     apuestas.Add(a);
                 }
                 con.Close();
@@ -125,7 +125,7 @@ namespace WebApplication1.Models
 
             }
 
-        }*/
+        }
 
         internal List<ApuestaDTO> RetrieveDTO()
         {

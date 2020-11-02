@@ -77,7 +77,7 @@ namespace WebApplication1.Models
             }
         }
 
-        /*internal List<Mercado> RetrieveByTipoandId(int id, float tipo)
+        internal List<Mercado> RetrieveByTipoandId(int id, float tipo)
         {
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -116,7 +116,7 @@ namespace WebApplication1.Models
 
 
             }
-        }*/
+        }
 
     }
 
