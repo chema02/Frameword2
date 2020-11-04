@@ -10,45 +10,26 @@ namespace WebApplication1.Models
 {
     public class ApuestasRepository
     {
-        private MySqlConnection Connect()
+        /*private MySqlConnection Connect()
         {
             string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;Uid=root;SslMode=none";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
 
-        }
+        }*/
         internal List<Apuesta> Retrieve()
         {
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from Apuestas";
-            try
+            List<Apuesta> apuestas = new List<Apuesta>();
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
             {
-                con.Open();
-                MySqlDataReader res = command.ExecuteReader();
-                Apuesta a = null;
-                List<Apuesta> apuestas = new List<Apuesta>();
-                while (res.Read())
-                {
-                    Debug.WriteLine("recuperamosapuestas: " + res.GetInt32(0) + " " + res.GetString(1)
-                                    + " " + res.GetInt32(2) + " " + res.GetString(3) + " " +
-                                    res.GetFloat(4) + " " + res.GetInt32(5) + " " + res.GetString(6));
-                    a = new Apuesta(res.GetInt32(0), res.GetString(1), res.GetInt32(2), res.GetString(3), res.GetFloat(4), res.GetInt32(5), res.GetDateTime(6));
-                    apuestas.Add(a);
-                }
-                con.Close();
+                apuestas = context.Apuestas.ToList();
+            }
+
                 return apuestas;
-            }
-            catch (MySqlException e)
-            {
-                Debug.WriteLine("se ha producido un error de conexión");
-                return null;
 
-
-            }
 
         }
-        internal List<ApuestaEmailDTO> RetrieveByUsuarioandId_mercado(string usuario, int id)//
+        /*internal List<ApuestaEmailDTO> RetrieveByUsuarioandId_mercado(string usuario, int id)//
         {
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -86,8 +67,8 @@ namespace WebApplication1.Models
 
             }
 
-        }
-        internal List<Apuesta> RetrieveById_mercadoandEmail_Usuario(string user, int id)
+        }*/
+        /*internal List<Apuesta> RetrieveById_mercadoandEmail_Usuario(string user, int id)
         {
             CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
             culInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -125,9 +106,9 @@ namespace WebApplication1.Models
 
             }
 
-        }
+        }*/
 
-        internal List<ApuestaDTO> RetrieveDTO()
+        /*internal List<ApuestaDTO> RetrieveDTO()
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
@@ -157,9 +138,9 @@ namespace WebApplication1.Models
 
             }
 
-        }
+        }*/
 
-        internal void Save(Apuesta a)
+        /*internal void Save(Apuesta a)
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
@@ -254,7 +235,7 @@ namespace WebApplication1.Models
 
             }
 
-        }
+        }*/
 
     }
 

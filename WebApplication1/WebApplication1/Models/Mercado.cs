@@ -8,20 +8,27 @@ namespace WebApplication1.Models
     public class Mercado
     {
 
-        public int Id { get; set; }
-        public int ID_Evento { get; set; }
+        public int MercadoId { get; set; }
+        public int EventoId { get; set; }//fk
         public float Over_Under { get; set; }
         public float Cuota_Over { get; set; }
         public float Cuota_Under { get; set; }
         public int Dinero_Over { get; set; }
         public int Dinero_Under { get; set; }
 
-        public Mercado(int id, int iD_Evento, float over_Under,
+        public Evento Eventos { get; set; }
+        public List<Apuesta> Apuestas { get; set; }//relación apuestas
+        public Mercado()
+        {
+
+        }
+
+        public Mercado(int mercadoId, int eventoId, float over_Under,
                        float cuota_Over, float cuota_Under,
                        int dinero_Over, int dinero_Under)
         {
-            Id = id;
-            ID_Evento = iD_Evento;
+            MercadoId = mercadoId;
+            EventoId = eventoId;
             Over_Under = over_Under;
             Cuota_Over = cuota_Over;
             Cuota_Under = cuota_Under;

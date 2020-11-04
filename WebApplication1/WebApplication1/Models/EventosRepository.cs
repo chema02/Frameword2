@@ -10,16 +10,16 @@ namespace WebApplication1.Models
     public class EventosRepository
 
     {
-        private MySqlConnection Connect()
+        /*private MySqlConnection Connect()
         {
             string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;Uid=root;SslMode=none";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
 
-        }
+        }*/
         internal List<Evento> Retrieve()
         {
-            MySqlConnection con = Connect();
+            /*MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
             command.CommandText = "select * from Eventos";
             try
@@ -43,9 +43,10 @@ namespace WebApplication1.Models
                 return null;
 
 
-            }
+            }*/
+            return null;
         }
-        internal List<EventoDTO> RetrieveDTO()
+        /*internal List<EventoDTO> RetrieveDTO()
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
@@ -72,7 +73,7 @@ namespace WebApplication1.Models
 
 
             }
-        }
+        }*/
     }
 
 }

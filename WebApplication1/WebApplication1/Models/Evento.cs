@@ -7,14 +7,21 @@ namespace WebApplication1.Models
 {
     public class Evento
     {
-        public int Id { get; set; }
+        public int EventoId { get; set; }
         public string Equipolocal { get; set; }
         public string Equipovisitante { get; set; }
         public DateTime Fecha { get; }
 
-        public Evento(int id, string equipolocal, string equipovisitante, DateTime fecha)
+        public List<Mercado> Mercados{ get; set; }//relación mercado
+
+        public Evento()
         {
-            Id = id;
+
+        }
+
+        public Evento(int eventoId, string equipolocal, string equipovisitante, DateTime fecha)
+        {
+            EventoId = eventoId;
             Equipolocal = equipolocal;
             Equipovisitante = equipovisitante;
             Fecha = fecha;
