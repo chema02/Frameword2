@@ -42,7 +42,9 @@ namespace WebApplication1.Controllers
         // GET: api/Apuestas/5
         public Apuesta Get(int id)
         {
-            return null;
+            var repo = new ApuestasRepository();
+            Apuesta d = repo.Retrieve(id);
+            return d;
         }
 
         // POST: api/Apuestas

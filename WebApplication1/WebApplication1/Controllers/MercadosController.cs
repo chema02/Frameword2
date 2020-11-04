@@ -32,12 +32,18 @@ namespace WebApplication1.Controllers
         // GET: api/Mercados/5
         public Mercado Get(int id)
         {
-            return null;
+            var repo = new MercadosRepository();
+            Mercado d = repo.Retrieve(id);
+            return d;
+
         }
 
         // POST: api/Mercados
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Mercado mercado)
         {
+            var repo = new MercadosRepository();
+            repo.Save(mercado);
+
         }
 
         // PUT: api/Mercados/5

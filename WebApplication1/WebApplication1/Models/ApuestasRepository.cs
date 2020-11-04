@@ -10,13 +10,7 @@ namespace WebApplication1.Models
 {
     public class ApuestasRepository
     {
-        /*private MySqlConnection Connect()
-        {
-            string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;Uid=root;SslMode=none";
-            MySqlConnection con = new MySqlConnection(connString);
-            return con;
 
-        }*/
         internal List<Apuesta> Retrieve()
         {
             List<Apuesta> apuestas = new List<Apuesta>();
@@ -26,8 +20,19 @@ namespace WebApplication1.Models
             }
 
                 return apuestas;
+        }
 
+        internal Apuesta Retrieve(int id)
+        {
+            Apuesta apuesta;
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                apuesta = context.Apuestas
+                    .Where(s => s.ApuestaId == id)
+                    .FirstOrDefault();
 
+            }
+            return apuesta;
         }
         /*internal List<ApuestaEmailDTO> RetrieveByUsuarioandId_mercado(string usuario, int id)//
         {
@@ -140,13 +145,13 @@ namespace WebApplication1.Models
 
         }*/
 
-        /*internal void Save(Apuesta a)
+        internal void Save(Apuesta a)
         {
-            MySqlConnection con = Connect();
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = "INSERT INTO Apuestas(Email_Usuario, ID_Mercado, Tipo, Cuota, Dinero_apostado,Fecha) VALUES ('" + a.Email_Usuario + "','" + a.ID_Mercado + "','" + a.Tipo + "','" + a.Cuota + "','" + a.Dinero_Apostado + "','" + a.Fecha + "');";
-            Debug.WriteLine("comando" + command.CommandText);
-            try
+            PlaceMyBetContext context = new PlaceMyBetContext();
+            context.Apuestas.Add(a);
+            context.SaveChanges();
+
+           /* try
             {
                 con.Open();
                 command.ExecuteNonQuery();
@@ -233,9 +238,9 @@ namespace WebApplication1.Models
             {
                 Debug.WriteLine("se ha producido un error de conexión");
 
-            }
+            }*/
 
-        }*/
+        }
 
     }
 

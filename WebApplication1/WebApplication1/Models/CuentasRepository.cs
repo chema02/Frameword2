@@ -7,9 +7,15 @@ namespace WebApplication1.Models
 {
     public class CuentasRepository
     {
-        internal List<Usuario> Retrieve()
+        internal List<Cuenta> Retrieve()
         {
-            return null;
+            List<Cuenta> cuentas = new List<Cuenta>();
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                cuentas = context.Cuentas.ToList();
+            }
+
+            return cuentas;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace WebApplication1.Models
             public string Tipo { get; set; }
             public float Cuota { get; set; }
             public int Dinero_Apostado { get; set; }
-            public DateTime Fecha { get; }
+           // public DateTime Fecha { get; }
 
             public Usuario Usuarios { get; set; }
             public Mercado Mercados { get; set; }
@@ -23,7 +23,7 @@ namespace WebApplication1.Models
             }
 
             public Apuesta(int apuestaId, int usuarioId, int mercadoId,
-                string tipo, float cuota, int dinero_Apostado, DateTime fecha)//
+                string tipo, float cuota, int dinero_Apostado /*, DateTime fecha*/)//
             {
                 ApuestaId = apuestaId;
                 UsuarioId = usuarioId;
@@ -31,7 +31,7 @@ namespace WebApplication1.Models
                 Tipo = tipo;
                 Cuota = cuota;
                 Dinero_Apostado = dinero_Apostado;
-                Fecha = fecha;
+                //Fecha = fecha;
             }
         }
        /* public class ApuestaDTO

@@ -18,32 +18,14 @@ namespace WebApplication1.Models
         }*/
         internal List<Usuario> Retrieve()
         {
-            /* MySqlConnection con = Connect();
-             MySqlCommand command = con.CreateCommand();
-             command.CommandText = "select * from Usuarios";
-             try
-             {
-                 con.Open();
-                 MySqlDataReader res = command.ExecuteReader();
-                 Usuario u = null;
-                 List<Usuario> usuarios = new List<Usuario>();
-                 while (res.Read())
-                 {
-                     Debug.WriteLine("recuperamos: " + res.GetString(0) + " " + res.GetString(1) + " " + res.GetString(2) + " " + res.GetInt32(3));
-                     u = new Usuario(res.GetString(0), res.GetString(1), res.GetString(2), res.GetInt32(3));
-                     usuarios.Add(u);
-                 }
-                 con.Close();
-                 return usuarios;
-             }
-             catch (MySqlException e)
-             {
-                 Debug.WriteLine("se ha producido un error de conexión");
-                 return null;
+            List<Usuario> usuarios= new List<Usuario>();
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                usuarios = context.Usuarios.ToList();
+            }
 
+            return usuarios;
 
-             }*/
-            return null;
         }
     }
 
