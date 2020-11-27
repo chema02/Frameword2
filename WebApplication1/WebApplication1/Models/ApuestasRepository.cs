@@ -5,6 +5,7 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Models
 {
@@ -16,7 +17,7 @@ namespace WebApplication1.Models
             List<Apuesta> apuestas = new List<Apuesta>();
             using (PlaceMyBetContext context = new PlaceMyBetContext())
             {
-                apuestas = context.Apuestas.ToList();
+                apuestas = context.Apuestas.Include(p => p.Mercados).ToList();
             }
 
                 return apuestas;
@@ -149,96 +150,38 @@ namespace WebApplication1.Models
         {
             PlaceMyBetContext context = new PlaceMyBetContext();
             context.Apuestas.Add(a);
+            Mercado mercado = context.Mercados.First(m => m.MercadoId == a.MercadoId);//recuperamos los mercados que coinciden con el mercadoId de la apuesta
+            //sumamos apuestas
+            if (a.Tipo == "over")
+            {
+                mercado.Dinero_Over = mercado.Dinero_Over + a.Dinero_Apostado;
+            }
+            else
+            {
+                mercado.Dinero_Under = mercado.Dinero_Under + a.Dinero_Apostado;
+            }
+            //calculamos probabilidad
+            if (a.Tipo == "over")
+            {
+                float probabilidadOver = 0;
+                double cuotaOver = 0;
+                probabilidadOver = mercado.Dinero_Over / (mercado.Dinero_Over + mercado.Dinero_Under);
+                cuotaOver = (1 / probabilidadOver) * 0.95;
+                mercado.Cuota_Over = (float)cuotaOver;
+            }
+            else
+            {
+                float probabilidadUnder = 0;
+                double cuotaUnder = 0;
+                probabilidadUnder = mercado.Dinero_Under / (mercado.Dinero_Under + mercado.Dinero_Over);
+                cuotaUnder = (1 / probabilidadUnder) * 0.95;
+                mercado.Cuota_Over = (float)cuotaUnder;
+
+
+            }
+
             context.SaveChanges();
 
-           /* try
-            {
-                con.Open();
-                command.ExecuteNonQuery();
-                MySqlCommand command1 = con.CreateCommand();
-                // command1.CommandText = "Select * from Mercados WHERE ID = " + a.ID_Mercado + "";
-                int id = a.ID_Mercado;
-                command1.CommandText = "Select * from mercados WHERE ID =@id";
-                command1.Parameters.AddWithValue("@id", id);
-                MySqlDataReader reader = command1.ExecuteReader();
-
-                int apuestaOver = 0;
-                int apuestaUnder = 0;
-                int dineroapostado = a.Dinero_Apostado;
-
-                while (reader.Read())
-                {
-                    apuestaOver = (int)reader[5];
-                    apuestaUnder = (int)reader[6];
-                }
-                reader.Close();
-                MySqlCommand command2 = con.CreateCommand();
-
-                if (a.Tipo == "over")
-                {
-                    // command2.CommandText = "UPDATE Mercados SET Dinero_Over= " + (apuestaOver + a.Dinero_Apostado) + "WHERE ID = " + a.ID_Mercado+"";
-                    command2.CommandText = "UPDATE mercados SET Dinero_Over=(@apuestaOver + @dineroapostado) WHERE ID=@id";
-                    command2.Parameters.AddWithValue("@id", id);
-                    command2.Parameters.AddWithValue("@dineroapostado", dineroapostado);
-                    command2.Parameters.AddWithValue("@apuestaOver", apuestaOver);
-                    command2.ExecuteNonQuery();
-                }
-                else
-                {
-                    // command2.CommandText = "UPDATE Mercados SET Dinero_Under= " + (apuestaUnder + a.Dinero_Apostado) + "WHERE ID = " + a.ID_Mercado+"";
-                    command2.CommandText = "UPDATE mercados SET Dinero_Under=(@apuestaUnder + @dineroapostado) WHERE ID=@id";
-                    command2.Parameters.AddWithValue("@id", id);
-                    command2.Parameters.AddWithValue("@dineroapostado", dineroapostado);
-                    command2.Parameters.AddWithValue("@apuestaUnder", apuestaUnder);
-                    command2.ExecuteNonQuery();
-
-                }
-
-                MySqlDataReader reader1 = command1.ExecuteReader();
-                while (reader1.Read())
-                {
-                    apuestaOver = (int)reader1[5];
-                    apuestaUnder = (int)reader1[6];
-                }
-                reader1.Close();
-
-                if (a.Tipo == "over")
-                {
-                    float probabilidadOver = 0;
-                    float cuotaOver = 0;
-
-                    probabilidadOver = apuestaOver / (apuestaOver + apuestaUnder);
-                    cuotaOver = (1 / probabilidadOver) * (float)0.95;
-                    MySqlCommand command3 = con.CreateCommand();
-                    // command2.CommandText = "UPDATE Mercados SET Cuota_Over= " + cuotaOver + "WHERE ID = " + a.ID_Mercado+"";
-                    command2.CommandText = "UPDATE mercados SET Cuota_Over = @cuotaOver WHERE ID=@id";
-                    command2.Parameters.AddWithValue("@cuotaOver", cuotaOver);
-                    command2.Parameters.AddWithValue("@id", id);
-                    command2.ExecuteNonQuery();
-
-                }
-                else
-                {
-                    float probabilidadUnder = 0;
-                    float cuotaUnder = 0;
-                    probabilidadUnder = apuestaUnder / (apuestaOver + apuestaUnder);
-                    cuotaUnder = (1 / probabilidadUnder) * (float)0.95;
-                    MySqlCommand command3 = con.CreateCommand();
-                    // command2.CommandText = "UPDATE Mercados SET Cuota_Under= " + cuotaUnder + "WHERE ID = " + a.ID_Mercado+"";
-                    command2.CommandText = "UPDATE mercados SET Cuota_Under = @cuotaUnder WHERE ID=@id";
-                    command2.Parameters.AddWithValue("@cuotaUnder", cuotaUnder);
-                    command2.Parameters.AddWithValue("@id", id);
-                    command2.ExecuteNonQuery();
-
-                }
-
-                con.Close();
-            }
-            catch (MySqlException e)
-            {
-                Debug.WriteLine("se ha producido un error de conexión");
-
-            }*/
 
         }
 

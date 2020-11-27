@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.Globalization;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Models
 {
@@ -17,7 +17,7 @@ namespace WebApplication1.Models
             List<Mercado> mercados = new List<Mercado>();
             using (PlaceMyBetContext context = new PlaceMyBetContext())
             {
-                mercados = context.Mercados.ToList();
+                mercados = context.Mercados.Include(p => p.Eventos).ToList();
             }
 
             return mercados;
