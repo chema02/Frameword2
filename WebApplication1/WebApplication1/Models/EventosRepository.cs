@@ -10,13 +10,7 @@ namespace WebApplication1.Models
     public class EventosRepository
 
     {
-        /*private MySqlConnection Connect()
-        {
-            string connString = "Server=127.0.0.1;Port=3306;Database=placemybet;Uid=root;SslMode=none";
-            MySqlConnection con = new MySqlConnection(connString);
-            return con;
 
-        }*/
         internal List<Evento> Retrieve()
         {
             List<Evento> eventos = new List<Evento>();
@@ -34,6 +28,35 @@ namespace WebApplication1.Models
             PlaceMyBetContext context = new PlaceMyBetContext();
 
             context.Eventos.Add(e);
+            context.SaveChanges();
+
+        }
+        internal void Update(int id, Evento d)
+        {
+            PlaceMyBetContext context = new PlaceMyBetContext();
+
+            Evento evento;
+
+            evento = context.Eventos
+            .Where(e => e.EventoId == id)
+            .FirstOrDefault();
+
+            evento.Equipolocal = d.Equipolocal;
+            evento.Equipovisitante = d.Equipovisitante;
+            context.SaveChanges();
+
+        }
+        internal void Delete(int id)
+        {
+            PlaceMyBetContext context = new PlaceMyBetContext();
+
+            Evento evento;
+
+            evento = context.Eventos
+            .Where(e => e.EventoId == id)
+            .FirstOrDefault();
+
+            context.Eventos.Remove(evento);
             context.SaveChanges();
 
         }

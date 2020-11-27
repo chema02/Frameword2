@@ -179,10 +179,22 @@ namespace WebApplication1.Models
 
 
             }
-
             context.SaveChanges();
+        }
+        public ApuestaDTO ToDTO(Apuesta a)
+        {
+            return new ApuestaDTO(a.UsuarioId,a.MercadoId ,a.Tipo,a.Cuota,a.Dinero_Apostado,a.Mercados);
+        }
 
+        internal List<ApuestaDTO> RetrieveDTO()
+        {
 
+            List<ApuestaDTO> apuestas = new List<ApuestaDTO>();
+            using (PlaceMyBetContext context = new PlaceMyBetContext())
+            {
+                apuestas = context.Apuestas.Include(m => m.Mercados).Select(p => ToDTO(p)).ToList();
+            }
+            return apuestas;
         }
 
     }

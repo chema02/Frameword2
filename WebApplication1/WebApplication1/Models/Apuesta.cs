@@ -34,23 +34,26 @@ namespace WebApplication1.Models
                 //Fecha = fecha;
             }
         }
-       /* public class ApuestaDTO
+        public class ApuestaDTO
         {
-            public string Email_Usuario { get; set; }
-            public int ID_Mercado { get; set; }
+            public int UsuarioId { get; set; }//fk//
+            public int MercadoId { get; set; }//fk
             public string Tipo { get; set; }
             public float Cuota { get; set; }
             public int Dinero_Apostado { get; set; }
+
             
-            public ApuestaDTO(string email_Usuario, int iD_Mercado,
-                string tipo, float cuota, int dinero_Apostado)
+            public Mercado Mercados { get; set; }//para el include para recuperar el objeto mercado de cada apuesta
+
+        public ApuestaDTO( int usuarioId,int mercadoId,
+                           string tipo, float cuota, int dineroApostado,Mercado mercado)
             {
-                Email_Usuario = email_Usuario;
-                ID_Mercado = iD_Mercado;
+                UsuarioId = usuarioId;
+                MercadoId = mercadoId;
                 Tipo = tipo;
                 Cuota = cuota;
-                Dinero_Apostado = dinero_Apostado;
-                
+                Dinero_Apostado = dineroApostado;
+                Mercado Mercados = mercado;
             }
 
         }
@@ -75,6 +78,6 @@ namespace WebApplication1.Models
             Dinero_Apostado = dinero_Apostado;
             
             }
-        }*/
+        }
 
 }
