@@ -10,27 +10,34 @@ namespace WebApplication1.Controllers
 {
     public class ApuestasController : ApiController
     {
-        // GET: api/Apuestas
-
+       /* // GET: api/Apuestas
         public IEnumerable<Apuesta> Get()
         {
             var repo = new ApuestasRepository();
-              List<Apuesta> apuestas = repo.Retrieve();
+            List<Apuesta> apuestas = repo.Retrieve();
             //List<ApuestaDTO> apuestas = repo.RetrieveDTO();
-
             return apuestas;
+        }*/
 
-        }
-        // GET: api/Apuestas?Email_Usuario=usuario &? Id_Mercado=id
-       /* public IEnumerable<ApuestaEmailDTO> Get(string usuario, int id)
+        // GET: api/ApuestasDTO
+        public IEnumerable<ApuestaDTO> Get()
         {
             var repo = new ApuestasRepository();
-            List<ApuestaEmailDTO> apuestas = repo.RetrieveByUsuarioandId_mercado(usuario, id);
+            //List<Apuesta> apuestas = repo.Retrieve();
+            List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             return apuestas;
+        }
 
-        }*/
+        // GET: api/Apuestas?Email_Usuario=usuario &? Id_Mercado=id
+        /* public IEnumerable<ApuestaEmailDTO> Get(string usuario, int id)
+         {
+             var repo = new ApuestasRepository();
+             List<ApuestaEmailDTO> apuestas = repo.RetrieveByUsuarioandId_mercado(usuario, id);
+             return apuestas;
+
+         }*/
         // GET: api/Apuestas?Id_Mercado=id & Email_Usuario=user
-       // [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         /*public IEnumerable<Apuesta> GetEmail(string user, int id)
         {
             var repo = new ApuestasRepository();

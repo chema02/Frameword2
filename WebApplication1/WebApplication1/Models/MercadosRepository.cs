@@ -45,7 +45,7 @@ namespace WebApplication1.Models
             context.SaveChanges();
 
         }
-        public MercadoDTO ToDTO(Mercado m)
+        public static MercadoDTO ToDTO(Mercado m)
         {
             return new MercadoDTO(m.Over_Under, m.Cuota_Over, m.Cuota_Under);
         }

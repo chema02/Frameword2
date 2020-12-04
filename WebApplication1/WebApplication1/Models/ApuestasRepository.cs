@@ -181,7 +181,7 @@ namespace WebApplication1.Models
             }
             context.SaveChanges();
         }
-        public ApuestaDTO ToDTO(Apuesta a)
+        public static ApuestaDTO ToDTO(Apuesta a)
         {
             return new ApuestaDTO(a.UsuarioId,a.MercadoId ,a.Tipo,a.Cuota,a.Dinero_Apostado,a.Mercados);
         }
