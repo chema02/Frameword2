@@ -164,21 +164,23 @@ namespace WebApplication1.Models
             if (a.Tipo == "over")
             {
                 float probabilidadOver = 0;
-                double cuotaOver = 0;
+                float cuotaOver = 0;
                 probabilidadOver = mercado.Dinero_Over / (mercado.Dinero_Over + mercado.Dinero_Under);
-                cuotaOver = (1 / probabilidadOver) * 0.95;
-                mercado.Cuota_Over = (float)cuotaOver;
+                cuotaOver = (1 / probabilidadOver) * 0.95f;
+                Console.WriteLine("ASFASDFASDFASDFADSF " + probabilidadOver + "   --  " + cuotaOver);
+                mercado.Cuota_Over = 2.5f;
             }
             else
             {
                 float probabilidadUnder = 0;
-                double cuotaUnder = 0;
-                probabilidadUnder = mercado.Dinero_Under / (mercado.Dinero_Under + mercado.Dinero_Over);
-                cuotaUnder = (1 / probabilidadUnder) * 0.95;
-                mercado.Cuota_Over = (float)cuotaUnder;
+                float cuotaUnder = 0;
+                /*probabilidadUnder = mercado.Dinero_Under / (mercado.Dinero_Under + mercado.Dinero_Over);
+                cuotaUnder = (1 / probabilidadUnder) * 0.95f;*/
+                mercado.Cuota_Over = 2.5f;
 
 
             }
+            context.Mercados.Update(mercado);
             context.SaveChanges();
         }
         public static ApuestaDTO ToDTO(Apuesta a)

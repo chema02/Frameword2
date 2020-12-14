@@ -10,23 +10,23 @@ namespace WebApplication1.Controllers
 {
     public class ApuestasController : ApiController
     {
-       /* // GET: api/Apuestas
+       // GET: api/Apuestas
         public IEnumerable<Apuesta> Get()
         {
             var repo = new ApuestasRepository();
             List<Apuesta> apuestas = repo.Retrieve();
             //List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             return apuestas;
-        }*/
+        }
 
-        // GET: api/ApuestasDTO
+        /*// GET: api/ApuestasDTO
         public IEnumerable<ApuestaDTO> Get()
         {
             var repo = new ApuestasRepository();
             //List<Apuesta> apuestas = repo.Retrieve();
             List<ApuestaDTO> apuestas = repo.RetrieveDTO();
             return apuestas;
-        }
+        }*/
 
         // GET: api/Apuestas?Email_Usuario=usuario &? Id_Mercado=id
         /* public IEnumerable<ApuestaEmailDTO> Get(string usuario, int id)
@@ -47,21 +47,22 @@ namespace WebApplication1.Controllers
         }*/
 
         // GET: api/Apuestas/5
-        public Apuesta Get(int id)
+       /* public Apuesta Get(int id)
         {
             var repo = new ApuestasRepository();
             Apuesta d = repo.Retrieve(id);
             return d;
-        }
+        }*/
 
         // POST: api/Apuestas
-        //[Authorize]
-        /*public void Post([FromBody]Apuesta apuesta)
+        
+        public void Post([FromBody]Apuesta apuesta)
         {
             var repo = new ApuestasRepository();
+            Console.WriteLine("Entro en post");
             repo.Save(apuesta);
 
-        }*/
+        }
 
         // PUT: api/Apuestas/5
         public void Put(int id, [FromBody]string value)
