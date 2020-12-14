@@ -148,35 +148,48 @@ namespace WebApplication1.Models
 
         internal void Save(Apuesta a)
         {
+            CultureInfo culInfo = new System.Globalization.CultureInfo("es-ES");
+
+            culInfo.NumberFormat.NumberDecimalSeparator = ".";
+
+            culInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            culInfo.NumberFormat.PercentDecimalSeparator = ".";
+            culInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            System.Threading.Thread.CurrentThread.CurrentCulture = culInfo;
+
             PlaceMyBetContext context = new PlaceMyBetContext();
-            context.Apuestas.Add(a);
             Mercado mercado = context.Mercados.First(m => m.MercadoId == a.MercadoId);//recuperamos los mercados que coinciden con el mercadoId de la apuesta
             //sumamos apuestas
             if (a.Tipo == "over")
             {
                 mercado.Dinero_Over = mercado.Dinero_Over + a.Dinero_Apostado;
+                a.Cuota = mercado.Cuota_Over;
+                context.Apuestas.Add(a);
+
             }
             else
             {
                 mercado.Dinero_Under = mercado.Dinero_Under + a.Dinero_Apostado;
+                a.Cuota = mercado.Cuota_Under;
+                context.Apuestas.Add(a);
+
             }
             //calculamos probabilidad
             if (a.Tipo == "over")
             {
                 float probabilidadOver = 0;
-                float cuotaOver = 0;
-                probabilidadOver = mercado.Dinero_Over / (mercado.Dinero_Over + mercado.Dinero_Under);
-                cuotaOver = (1 / probabilidadOver) * 0.95f;
-                Console.WriteLine("ASFASDFASDFASDFADSF " + probabilidadOver + "   --  " + cuotaOver);
-                mercado.Cuota_Over = 2.5f;
+                double cuotaOver = 0;
+                probabilidadOver = (float)mercado.Dinero_Over /(float) (mercado.Dinero_Over + mercado.Dinero_Under);
+                cuotaOver = (1 / probabilidadOver) * 0.95;
+                mercado.Cuota_Over = (float) cuotaOver;
             }
             else
             {
                 float probabilidadUnder = 0;
-                float cuotaUnder = 0;
-                /*probabilidadUnder = mercado.Dinero_Under / (mercado.Dinero_Under + mercado.Dinero_Over);
-                cuotaUnder = (1 / probabilidadUnder) * 0.95f;*/
-                mercado.Cuota_Over = 2.5f;
+                double cuotaUnder = 0;
+                probabilidadUnder = (float)mercado.Dinero_Under / (float)(mercado.Dinero_Under + mercado.Dinero_Over);
+                cuotaUnder = (1 / probabilidadUnder) * 0.95;
+                mercado.Cuota_Over = (float)cuotaUnder;
 
 
             }
